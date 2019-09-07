@@ -7,7 +7,15 @@ let User = mongoose.model('users');
 
 passport.serializeUser((user, done) => {
   done(null, user.id)
-})
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id)
+    .then(user => {
+      done(null, user);
+    });
+});
+
 
 passport.use(
   new GoogleStrategy(
@@ -23,9 +31,9 @@ passport.use(
         } else {
           new User({ googleId: profile.id, displayName: profile.displayName, emails: profile.emails, date: new Date() })
             .save()
-            .then(user => done(null, user))
+            .then(user => done(null, user));
         }
-      })
+      });
     }
   )
-)
+);
