@@ -9,8 +9,10 @@
   },
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
-    "prettier": "prettier --write **/*.js"
+    "server": "nodemon index.js",
+    "prettier": "prettier --write **/*.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "",
