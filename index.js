@@ -7,7 +7,7 @@ const keys = require("./config/keys");
 require("./models/User");
 require("./services/passport");
 
-mongoose.connect(keys.mongoURI);
+mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
 
 app.use(
     cookieSession({
@@ -22,4 +22,11 @@ app.use(passport.session());
 require("./routes/authRoutes")(app);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT);
+app.listen(PORT, () => { console.log("SERVER READY") });
+
+
+process.on('SIGTERM', () => {
+    server.close(() => {
+        console.log('Process terminated')
+    })
+})
