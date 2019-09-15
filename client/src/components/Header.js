@@ -1,33 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import LoginButton from "./LoginButton";
 
 class Header extends React.Component {
-  renderContent() {
-    switch (this.props.auth) {
-      case null:
-        return;
-      case false:
-        return (
-          <li>
-            <a href="auth/google" className="waves-effect indigo lighten-2 btn">
-              <i className="material-icons left">laptop</i>
-              Sign in with Google
-            </a>
-          </li>
-        );
-      default:
-        return (
-          <li>
-            <a href="/api/logout" className="waves-effect indigo lighten-2 btn">
-              <i className="material-icons left">laptop</i>
-              Logout
-            </a>
-          </li>
-        );
-    }
-  }
-
   render() {
     return (
       <nav>
@@ -36,7 +12,7 @@ class Header extends React.Component {
             <i className="material-icons">cloud</i>
             Feedbacker
           </Link>
-          <ul className="right hide-on-med-and-down">{this.renderContent()}</ul>
+          <ul className="right hide-on-med-and-down"><LoginButton authData={this.props.auth} /></ul>
         </div>
       </nav>
     );
