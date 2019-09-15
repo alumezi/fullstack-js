@@ -23,10 +23,3 @@ require("./routes/authRoutes")(app);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => { console.log("SERVER READY") });
-
-
-process.on('SIGTERM', () => {
-    server.close(() => {
-        console.log('Process terminated')
-    })
-})
